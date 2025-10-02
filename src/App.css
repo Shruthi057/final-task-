@@ -22,10 +22,46 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 20px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+/* 🔹 RESPONSIVE STYLES */
+
+/* Tablet (≤ 1024px) */
+@media (max-width: 1024px) {
+  .App-header {
+    font-size: calc(8px + 2vmin);
+    padding: 15px;
+  }
+
+  .App-logo {
+    height: 30vmin;
+  }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  .App-header {
+    font-size: 16px;
+    padding: 10px;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .App-logo {
+    height: 25vmin;
+    margin-bottom: 20px;
+  }
+
+  .App-link {
+    display: block;
+    margin: 10px 0;
+    font-size: 14px;
+  }
 }
 
 @keyframes App-logo-spin {
