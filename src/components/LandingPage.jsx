@@ -8,46 +8,69 @@ export default function PasswordPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
     if (password === "Brington@123") {
       navigate("/home");
     } else {
-      setError("❌ Wrong password! Try again.");
+      setError("Please enter the correct password."); // Red error
     }
+  };
+
+  const handleCloseClick = () => {
+    window.location.href = "https://www.brington.in/";
   };
 
   return (
     <div style={{
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
       alignItems: 'center',
+      justifyContent: 'center',
       height: '100vh',
-      backgroundColor: '#ffffff',
-      padding: '20px'
+      background: '#fff',
     }}>
+      <div
+        onClick={handleCloseClick}
+        style={{
+          position: 'absolute',
+          top: 24,
+          right: 36,
+          fontSize: '30px',
+          color: '#626262',
+          cursor: 'pointer',
+          fontWeight: 400,
+          userSelect: 'none',
+        }}
+        aria-label="Close"
+        role="button"
+        tabIndex={0}
+        onKeyPress={e => { if (e.key === 'Enter' || e.key === ' ') handleCloseClick(); }}
+      >
+        &#10005;
+      </div>
       <h1 style={{
-        fontSize: '2.5rem',
-        fontWeight: 'bold',
-        marginBottom: '1rem',
-        color: '#1f2937'
+        fontSize: '2.8rem',
+        fontWeight: 500,
+        marginBottom: '0.5rem',
+        color: '#222',
+        letterSpacing: '0.02em',
+        textAlign: 'center',
       }}>Guest Area</h1>
-      
+
       <p style={{
-        color: '#6b7280',
-        marginBottom: '2rem',
-        fontSize: '1.1rem',
-        textAlign: 'center'
+        color: '#212121',
+        fontSize: '18px',
+        marginBottom: '2.5rem',
+        textAlign: 'center',
       }}>
-        Please enter the password to continue.
+        Please enter the password below.
       </p>
 
-      <form onSubmit={handleSubmit} style={{ 
+      <form onSubmit={handleSubmit} style={{
         width: '100%',
-        maxWidth: '400px',
+        maxWidth: '350px',
         display: 'flex',
         flexDirection: 'column',
-        alignItems: 'center'
+        alignItems: 'center',
       }}>
         <input
           type="password"
@@ -56,54 +79,47 @@ export default function PasswordPage() {
             setPassword(e.target.value);
             setError("");
           }}
-          placeholder="Enter password"
+          placeholder="Password"
           style={{
             width: '100%',
-            padding: '12px 16px',
-            border: error ? '2px solid #ef4444' : '2px solid #d1d5db',
+            padding: '15px 12px',
+            border: error ? '2px solid #ef4444' : '2px solid #e0e0e0',
             borderRadius: '8px',
-            marginBottom: '1rem',
-            fontSize: '16px',
-            textAlign: 'center',
+            marginBottom: '1.5rem',
+            fontSize: '17px',
+            textAlign: 'left',
             outline: 'none',
-            transition: 'border-color 0.2s'
-          }}
-          onFocus={(e) => {
-            e.target.style.borderColor = '#3b82f6';
-          }}
-          onBlur={(e) => {
-            e.target.style.borderColor = error ? '#ef4444' : '#d1d5db';
+            background: '#fafafa',
           }}
         />
-        
         {error && (
           <div style={{
             color: '#ef4444',
             marginBottom: '1rem',
-            fontSize: '14px',
+            fontSize: '15px',
+            fontWeight: 450,
             textAlign: 'center'
           }}>
             {error}
           </div>
         )}
-        
         <button
           type="submit"
           style={{
-            backgroundColor: '#16a34a',
-            color: 'white',
-            padding: '12px 32px',
-            borderRadius: '8px',
+            backgroundColor: '#10b981',
+            color: '#fff',
+            padding: '13px 0',
+            borderRadius: '6px',
             border: 'none',
-            fontSize: '16px',
-            fontWeight: '500',
+            fontWeight: 500,
+            fontSize: '18px',
             cursor: 'pointer',
-            transition: 'background-color 0.2s',
             width: '100%',
-            maxWidth: '200px'
+            marginTop: '8px',
+            maxWidth: '180px',
           }}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#15803d'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#16a34a'}
+          onMouseOver={e => e.target.style.backgroundColor = '#059669'}
+          onMouseOut={e => e.target.style.backgroundColor = '#10b981'}
         >
           Go
         </button>
