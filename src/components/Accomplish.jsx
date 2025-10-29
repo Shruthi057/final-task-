@@ -10,27 +10,29 @@ const Accomplish = () => {
     flexDirection: "column",
     alignItems: "center",
     padding: "60px 20px",
-    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", 
+    background: "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)", 
     fontFamily: "'Segoe UI', sans-serif",
-    color: "white",
+    color: "#1e293b",
     textAlign: "center",
     boxSizing: "border-box",
   };
 
   const headingStyle = {
-    fontSize: "6rem", 
-    fontWeight: 300, 
+    fontSize: "4.5rem", 
+    fontWeight: 600, 
     lineHeight: "1.1",
-    margin: "10px 0",
-    color: "#ffffff",
+    margin: "5px 0",
+    color: "#1e293b",
+    textAlign: "center",
   };
 
   const titleStyle = {
     maxWidth: "800px",
-    fontSize: "20px",
+    fontSize: "18px",
     lineHeight: "1.6",
-    margin: "40px 0 50px 0",
-    color: "#ffffffcc",
+    margin: "30px 0 50px 0",
+    color: "#64748b",
+    textAlign: "center",
   };
 
   const contentStyle = {
@@ -39,13 +41,14 @@ const Accomplish = () => {
     alignItems: "center",
     width: "100%",
     maxWidth: "1200px",
+    marginTop: "40px",
   };
 
   const listStyle = {
     display: "flex",
     flexDirection: "column",
-    gap: "25px",
-    color: "white",
+    gap: "30px",
+    color: "#1e293b",
   };
 
   const leftListStyle = {
@@ -64,21 +67,22 @@ const Accomplish = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    gap: "5px",
-    fontSize: "22px", 
-    color: "white",
+    gap: "8px",
+    fontSize: "20px", 
+    color: "#1e293b",
+    fontWeight: "500",
   };
 
   const checkIconStyle = {
-    color: "#ffffff",
-    fontSize: "24px",
+    color: "#10b981",
+    fontSize: "22px",
   };
 
   const underlineStyle = {
     width: "100%",
-    height: "2px",
-    backgroundColor: "rgba(255, 255, 255, 0.5)",
-    marginTop: "5px",
+    height: "1px",
+    backgroundColor: "#cbd5e1",
+    marginTop: "8px",
   };
 
   const centerWrapperStyle = {
@@ -90,11 +94,11 @@ const Accomplish = () => {
   };
 
   const svgStyle = {
-    width: "500px",
-    height: "500px",
-    maxWidth: "90vw",
-    maxHeight: "90vw",
-    opacity: 0.9,
+    width: "400px",
+    height: "400px",
+    maxWidth: "80vw",
+    maxHeight: "80vw",
+    opacity: 0.8,
   };
 
   const iconWrapperStyle = {
@@ -102,41 +106,43 @@ const Accomplish = () => {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: "120px",
-    height: "120px",
+    width: "100px",
+    height: "100px",
     borderRadius: "50%",
-    boxShadow: "0 5px 15px rgba(0,0,0,0.3)",
-    background: "transparent", 
+    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+    background: "white", 
   };
 
   const iconStyle = {
-    width: "80px",
-    height: "80px",
+    width: "60px",
+    height: "60px",
   };
 
   const buttonWrapperStyle = {
-    marginTop: "50px",
+    marginTop: "60px",
   };
 
   const buttonStyle = {
     display: "inline-block",
-    padding: "15px 50px",
-    backgroundColor: "#ffffff",
-    color: "#667eea",
+    padding: "14px 45px",
+    backgroundColor: "#10b981",
+    color: "white",
     fontWeight: 600,
-    fontSize: "18px",
-    borderRadius: "10px",
+    fontSize: "16px",
+    borderRadius: "8px",
     textDecoration: "none",
     transition: "0.3s",
     border: "none",
     cursor: "pointer",
+    boxShadow: "0 4px 12px rgba(16, 185, 129, 0.3)",
   };
 
   return (
     <div style={containerStyle}>
-      <h1 style={headingStyle}>Accomplish</h1>
-      <h1 style={headingStyle}>Anything in</h1>
-      <h1 style={headingStyle}>Developing</h1>
+      <div style={{ textAlign: "center" }}>
+        <h1 style={headingStyle}>Accomplish Anything</h1>
+        <h1 style={headingStyle}>in Developing</h1>
+      </div>
 
       <p style={titleStyle}>
         This is the space to introduce the Services section. Briefly describe
@@ -146,10 +152,10 @@ const Accomplish = () => {
 
       <div style={contentStyle}>
         <div style={leftListStyle}>
-          {[1, 2, 3].map((i) => (
-            <div key={i} style={listItemStyle}>
+          {["Sample Text 1", "Sample Text", "Sample Text"].map((text, index) => (
+            <div key={index} style={listItemStyle}>
               <FaCheckCircle style={checkIconStyle} />
-              <span>Sample Text {i}</span>
+              <span>{text}</span>
               <div style={underlineStyle}></div>
             </div>
           ))}
@@ -163,10 +169,10 @@ const Accomplish = () => {
         </div>
 
         <div style={rightListStyle}>
-          {[4, 5, 6].map((i) => (
-            <div key={i} style={listItemStyle}>
+          {["Sample Text", "Sample Text", "Sample Text"].map((text, index) => (
+            <div key={index} style={listItemStyle}>
               <FaCheckCircle style={checkIconStyle} />
-              <span>Sample Text {i}</span>
+              <span>{text}</span>
               <div style={underlineStyle}></div>
             </div>
           ))}
@@ -179,8 +185,14 @@ const Accomplish = () => {
           target="_blank"
           rel="noopener noreferrer"
           style={buttonStyle}
-          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f1f5f9")}
-          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ffffff")}
+          onMouseOver={(e) => {
+            e.currentTarget.style.backgroundColor = "#059669";
+            e.currentTarget.style.transform = "translateY(-2px)";
+          }}
+          onMouseOut={(e) => {
+            e.currentTarget.style.backgroundColor = "#10b981";
+            e.currentTarget.style.transform = "translateY(0)";
+          }}
         >
           Create Now!
         </a>
