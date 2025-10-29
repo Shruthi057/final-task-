@@ -3,7 +3,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background: linear-gradient(135deg, #0a2f0a, #1a5c1a, #0d3b0d);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
   position: absolute;
   width: 4px;
   height: 4px;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(76, 255, 0, 0.7);
   border-radius: 50%;
   animation: twinkle 3s infinite alternate;
 }
@@ -82,12 +82,12 @@
   transform: translateY(20px);
   transition: opacity 0.8s ease, transform 0.8s ease;
   text-align: center;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(20, 83, 45, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 12px;
   padding: 30px 20px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 20, 0, 0.3);
+  border: 1px solid rgba(76, 255, 0, 0.2);
 }
 
 .data-item.visible {
@@ -99,14 +99,14 @@
   font-size: 3.5rem;
   font-weight: 700;
   margin: 0 0 15px 0;
-  color: #fff;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  color: #4cff00;
+  text-shadow: 0 0 10px rgba(76, 255, 0, 0.5);
 }
 
 .text {
   font-size: 1.1rem;
   margin: 0;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(200, 255, 200, 0.9);
   line-height: 1.5;
 }
 
@@ -130,7 +130,7 @@
 
 .dotted-line {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.6);
+  stroke: #4cff00;
   stroke-width: 2;
   opacity: 0;
   animation: drawLine 1s forwards;
@@ -151,6 +151,23 @@
 @keyframes drawLine {
   to {
     opacity: 1;
+  }
+}
+
+/* Pulse animation for numbers */
+.data-item.visible .number {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    text-shadow: 0 0 5px rgba(76, 255, 0, 0.7);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(76, 255, 0, 0.9), 0 0 30px rgba(76, 255, 0, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(76, 255, 0, 0.7);
   }
 }
 
