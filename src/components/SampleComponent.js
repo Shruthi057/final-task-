@@ -1,76 +1,117 @@
-import React, { useState, useEffect } from 'react';
-import './SampleComponent.css';
+import React, { useEffect, useRef } from 'react';
+import './SampleComponent.css'; // We'll create this CSS file
 
-const SampleComponent = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const dataSequence = [
-    { number: "1,034", text: "Simple Data about Sample Things" },
-    { number: "2", text: "Simple Data about Sample" },
-    { number: "54", text: "Simple Data about Sample" },
-    { number: "25", text: "Simple Data about Sample" }
-  ];
+const SparkleSection = () => {
+  const numbersRef = useRef([]);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 300);
-    return () => clearTimeout(timer);
+    // Animation for numbers
+    const animateNumbers = () => {
+      numbersRef.current.forEach((element, index) => {
+        if (element && isElementInViewport(element)) {
+          const finalNumber = getFinalNumber(index);
+          animateValue(element, 0, finalNumber, 2000);
+        }
+      });
+    };
+
+    const isElementInViewport = (el) => {
+      const rect = el.getBoundingClientRect();
+      return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+      );
+    };
+
+    const getFinalNumber = (index) => {
+      const numbers = [1034, 2, 34, 25];
+      return numbers[index] || 0;
+    };
+
+    const animateValue = (element, start, end, duration) => {
+      if (element._isAnimating) return;
+      element._isAnimating = true;
+
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const value = Math.floor(progress * (end - start) + start);
+        element.textContent = value.toLocaleString();
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        } else {
+          element._isAnimating = false;
+        }
+      };
+      window.requestAnimationFrame(step);
+    };
+
+    // Initial animation check
+    animateNumbers();
+
+    // Add scroll listener for animation
+    window.addEventListener('scroll', animateNumbers);
+    return () => window.removeEventListener('scroll', animateNumbers);
   }, []);
 
+  const sparkleData = [
+    { number: 1034, top: "200px" },
+    { number: 2, top: "400px" },
+    { number: 34, top: "600px" },
+    { number: 25, top: "800px" }
+  ];
+
   return (
-    <div className='container'>
-      <div className='background-elements'>
-        <div className='star-trajectories'>
-          <div className='trajectory trajectory-1'>
-            <div className='star star-start'></div>
-            <div className='star star-end'></div>
-          </div>
-          <div className='trajectory trajectory-2'>
-            <div className='star star-start'></div>
-            <div className='star star-end'></div>
-          </div>
-        </div>
+    <div className="sparkle-section">
+      {/* ✨ Sparkle Section with Curved Dotted Snake and Animated Numbers */}
+      <svg
+        className="sparkle-path-svg"
+        viewBox="0 0 400 1600"
+        preserveAspectRatio="none"
+      >
+        <path
+          id="mainSnakePath"
+          d="M200 50 
+             C350 250, 50 500, 300 700 
+             S100 1100, 250 1350 
+             S300 1600, 200 1550"
+          stroke="#ffffffa5"
+          strokeWidth="3"
+          strokeDasharray="8 14"
+          fill="none"
+        />
+      </svg>
+
+      {/* Animated Star */}
+      <div className="star">
+        <div className="star-core"></div>
+        <div className="star-glow"></div>
       </div>
 
-      <div className='data-grid'>
-        {dataSequence.map((item, index) => (
-          <div 
-            key={index} 
-            className={`data-item ${isVisible ? 'visible' : ''}`}
-            style={{ animationDelay: `${index * 0.2}s` }}
-          >
-            <h1 className='number'>{item.number}</h1>
-            <p className='text'>{item.text}</p>
+      {/* Sparkle Items */}
+      {sparkleData.map((item, index) => (
+        <div 
+          key={index}
+          className="sparkle-item" 
+          style={{ top: item.top, left: "50%" }}
+        >
+          <div className="sparkle-content">
+            <div className="small-star"></div>
+            <div 
+              className="big-number"
+              ref={el => numbersRef.current[index] = el}
+            >
+              {item.number}
+            </div>
           </div>
-        ))}
-        
-        {/* Dotted connecting lines */}
-        <div className="connecting-lines">
-          <svg className="line-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-            {/* Horizontal line from item 1 to item 2 */}
-            <path 
-              d="M 25 50 L 75 50" 
-              className="dotted-line line-1"
-              strokeDasharray="4,4"
-            />
-            {/* Vertical line from item 2 to item 3 */}
-            <path 
-              d="M 75 50 L 75 75" 
-              className="dotted-line line-2"
-              strokeDasharray="4,4"
-            />
-            {/* Horizontal line from item 3 to item 4 */}
-            <path 
-              d="M 75 75 L 25 75" 
-              className="dotted-line line-3"
-              strokeDasharray="4,4"
-            />
-          </svg>
+          <div className="sparkle-sub">Sample Data about Sample Things</div>
         </div>
-      </div>
+      ))}
     </div>
   );
 };
 
-export default SampleComponent;
+export default SparkleSection;
