@@ -5,12 +5,13 @@ const SparkleSection = () => {
   const numbersRef = useRef([]);
 
   useEffect(() => {
-    // Animation for numbers
+    // Animation for numbers - simplified to just show static numbers
     const animateNumbers = () => {
       numbersRef.current.forEach((element, index) => {
         if (element && isElementInViewport(element)) {
           const finalNumber = getFinalNumber(index);
-          animateValue(element, 0, finalNumber, 2000);
+          // Just set the static number directly
+          element.textContent = finalNumber.toLocaleString();
         }
       });
     };
@@ -26,27 +27,8 @@ const SparkleSection = () => {
     };
 
     const getFinalNumber = (index) => {
-      const numbers = [1034, 2, 34, 25];
+      const numbers = [1034, 2, 54, 25]; // Updated numbers: 1034, 2, 54, 25
       return numbers[index] || 0;
-    };
-
-    const animateValue = (element, start, end, duration) => {
-      if (element._isAnimating) return;
-      element._isAnimating = true;
-
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
-        element.textContent = value.toLocaleString();
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        } else {
-          element._isAnimating = false;
-        }
-      };
-      window.requestAnimationFrame(step);
     };
 
     // Initial animation check
@@ -60,13 +42,13 @@ const SparkleSection = () => {
   const sparkleData = [
     { number: 1034, top: "200px" },
     { number: 2, top: "400px" },
-    { number: 34, top: "600px" },
+    { number: 54, top: "600px" }, // Changed from 34 to 54
     { number: 25, top: "800px" }
   ];
 
   return (
     <div className="sparkle-section">
-      {/* ✨ Sparkle Section with Curved Dotted Snake and Animated Numbers */}
+      {/* ✨ Sparkle Section with Curved Dotted Snake and Static Numbers */}
       <svg
         className="sparkle-path-svg"
         viewBox="0 0 400 1600"
