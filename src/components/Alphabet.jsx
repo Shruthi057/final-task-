@@ -22,12 +22,23 @@ const Alphabet = () => {
     F: fvideo,
   };
 
+  // Play video safely
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.load();
-      videoRef.current
-        .play()
-        .catch((err) => console.log("Autoplay blocked:", err));
+    const video = videoRef.current;
+    if (video) {
+      video.load();
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch((err) => {
+          // Autoplay blocked, fallback: wait for user interaction
+          console.log("Autoplay blocked, waiting for interaction:", err);
+          const playOnClick = () => {
+            video.play().catch(console.log);
+            window.removeEventListener("click", playOnClick);
+          };
+          window.addEventListener("click", playOnClick);
+        });
+      }
     }
   }, [activeLetter]);
 
@@ -56,13 +67,13 @@ const Alphabet = () => {
 
   const videoStyle = {
     width: "100%",
-    height: "70%", // video height
+    height: "70%",
     objectFit: "cover",
   };
 
   const imageStyle = {
     width: "100%",
-    height: "30%", // footer image height
+    height: "30%",
     objectFit: "cover",
   };
 
@@ -72,8 +83,8 @@ const Alphabet = () => {
     gridTemplateRows: "repeat(2, 1fr)",
     backgroundColor: "#000",
     border: "1px solid #fff",
-    height: "calc(100% - 60px)", // fixed height minus footer image
-    minHeight: "300px", // ensures it never collapses
+    height: "calc(100% - 60px)",
+    minHeight: "300px",
   };
 
   const cellStyle = {
@@ -87,7 +98,7 @@ const Alphabet = () => {
     cursor: "pointer",
     transition: "all 0.3s ease",
     border: "1px solid #fff",
-    overflow: "hidden", // ensures scale doesn't expand grid
+    overflow: "hidden",
   };
 
   const handleMouseEnter = (letter) => {
@@ -96,7 +107,6 @@ const Alphabet = () => {
 
   return (
     <div style={containerStyle}>
-      {/* Left Side: Video + Footer Image (gridfoot on left) */}
       <div style={leftStyle}>
         <video
           ref={videoRef}
@@ -105,12 +115,12 @@ const Alphabet = () => {
           autoPlay
           muted
           loop
+          playsInline
           style={videoStyle}
         />
         <img src={gridfoot} alt="Grid Footer" style={imageStyle} />
       </div>
 
-      {/* Right Side: Grid + Footer Image (alphafoot on right) */}
       <div style={rightStyle}>
         <div style={gridStyle}>
           {Object.keys(videos).map((letter) => {
