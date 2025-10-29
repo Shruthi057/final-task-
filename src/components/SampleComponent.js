@@ -5,10 +5,10 @@ const SampleComponent = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const dataSequence = [
-    { number: "1,034", text: "Sample Data about Sample Things" },
-    { number: "2", text: "Sample Data about Sample" },
-    { number: "54", text: "Sample Data about Sample" },
-    { number: "25", text: "Sample Data about Sample" }
+    { number: "1,034", text: "Simple Data about Sample Things" },
+    { number: "2", text: "Simple Data about Sample" },
+    { number: "54", text: "Simple Data about Sample" },
+    { number: "25", text: "Simple Data about Sample" }
   ];
 
   useEffect(() => {
