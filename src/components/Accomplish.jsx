@@ -10,9 +10,9 @@ const Accomplish = () => {
     flexDirection: "column",
     alignItems: "center",
     padding: "60px 20px",
-    background: "linear-gradient(90deg, #1f1f1f 0%, #3b82f6 100%)", 
+    background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)", 
     fontFamily: "'Segoe UI', sans-serif",
-    color: "black",
+    color: "white",
     textAlign: "center",
     boxSizing: "border-box",
   };
@@ -22,7 +22,7 @@ const Accomplish = () => {
     fontWeight: 300, 
     lineHeight: "1.1",
     margin: "10px 0",
-    color: "#000000",
+    color: "#ffffff",
   };
 
   const titleStyle = {
@@ -70,14 +70,14 @@ const Accomplish = () => {
   };
 
   const checkIconStyle = {
-    color: "#4ade80",
+    color: "#ffffff",
     fontSize: "24px",
   };
 
   const underlineStyle = {
     width: "100%",
     height: "2px",
-    backgroundColor: "white",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
     marginTop: "5px",
   };
 
@@ -121,13 +121,15 @@ const Accomplish = () => {
   const buttonStyle = {
     display: "inline-block",
     padding: "15px 50px",
-    backgroundColor: "#22c55e",
-    color: "black",
+    backgroundColor: "#ffffff",
+    color: "#667eea",
     fontWeight: 600,
     fontSize: "18px",
     borderRadius: "10px",
     textDecoration: "none",
     transition: "0.3s",
+    border: "none",
+    cursor: "pointer",
   };
 
   return (
@@ -177,8 +179,8 @@ const Accomplish = () => {
           target="_blank"
           rel="noopener noreferrer"
           style={buttonStyle}
-          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#16a34a")}
-          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#22c55e")}
+          onMouseOver={(e) => (e.currentTarget.style.backgroundColor = "#f1f5f9")}
+          onMouseOut={(e) => (e.currentTarget.style.backgroundColor = "#ffffff")}
         >
           Create Now!
         </a>
